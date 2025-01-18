@@ -1,0 +1,2 @@
+com/fastcampus/loan/service/CounselServiceTest.java
+ com.fastcampus.loan.service.CounselServiceTest
