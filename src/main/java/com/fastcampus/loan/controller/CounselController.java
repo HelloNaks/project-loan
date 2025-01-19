@@ -4,10 +4,7 @@ import com.fastcampus.loan.dto.CounselDto;
 import com.fastcampus.loan.dto.ResponseDTO;
 import com.fastcampus.loan.service.CounselService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,5 +18,8 @@ public class CounselController extends AbstractController{
         return ok(counselService.create(request));
     }
 
-    
+    @GetMapping("/{counselId}")
+    public ResponseDTO<CounselDto.Response> get(@PathVariable Long counselId){
+        return ok(counselService.get(counselId));
+    }
 }

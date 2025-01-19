@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.fastcampus.loan.service.CounselServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-01-18T09:23:46" hostname="gimnaghyeon-ui-MacBookPro.local" time="0.345">
+<testsuite name="com.fastcampus.loan.service.CounselServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-01-19T06:58:33" hostname="gimnaghyeon-ui-MacBookPro.local" time="0.331">
   <properties/>
-  <testcase name="Should_ReturnResponseOfNewCounselEntity_When_RequestCounsel()" classname="com.fastcampus.loan.service.CounselServiceTest" time="0.345"/>
+  <testcase name="Should_ThrowException_When_RequestNotExistCouselId()" classname="com.fastcampus.loan.service.CounselServiceTest" time="0.331"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
