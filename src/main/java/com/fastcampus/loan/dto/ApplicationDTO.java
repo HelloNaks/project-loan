@@ -2,14 +2,17 @@ package com.fastcampus.loan.dto;
 
 import lombok.*;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class CounselDto {
+public class ApplicationDTO implements Serializable {
 
     @NoArgsConstructor
     @AllArgsConstructor
-    @Builder
     @Getter
+    @Setter
+    @Builder
     public static class Request {
 
         private String name;
@@ -18,24 +21,17 @@ public class CounselDto {
 
         private String email;
 
-        private String memo;
-
-        private String address;
-
-        private String addressDetail;
-
-        private String zipCode;
-
+        private BigDecimal hopeAmount;
     }
 
     @NoArgsConstructor
     @AllArgsConstructor
-    @Builder
     @Getter
     @Setter
+    @Builder
     public static class Response {
 
-        private Long counselId;
+        private Long applicationId;
 
         private String name;
 
@@ -43,17 +39,12 @@ public class CounselDto {
 
         private String email;
 
-        private String memo;
-
-        private String address;
-
-        private String addressDetail;
-
-        private String zipCode;
+        private BigDecimal hopeAmount;
 
         private LocalDateTime appliedAt;
 
-        private LocalDateTime updatedAt;
+        private LocalDateTime createdAt;
 
+        private LocalDateTime updatedAt;
     }
 }
