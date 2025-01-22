@@ -1,6 +1,6 @@
 package com.fastcampus.loan.controller;
 
-import com.fastcampus.loan.dto.CounselDto;
+import com.fastcampus.loan.dto.CounselDTO;
 import com.fastcampus.loan.dto.ResponseDTO;
 import com.fastcampus.loan.service.CounselService;
 import lombok.RequiredArgsConstructor;
@@ -14,22 +14,22 @@ public class CounselController extends AbstractController{
     private final CounselService counselService;
 
     @PostMapping
-    public ResponseDTO<CounselDto.Response> create(@RequestBody CounselDto.Request request) {
+    public ResponseDTO<CounselDTO.Response> create(@RequestBody CounselDTO.Request request) {
         return ok(counselService.create(request));
     }
 
     @GetMapping("/{counselId}")
-    public ResponseDTO<CounselDto.Response> get(@PathVariable Long counselId){
+    public ResponseDTO<CounselDTO.Response> get(@PathVariable Long counselId){
         return ok(counselService.get(counselId));
     }
 
     @PutMapping("/{counselId}")
-    public ResponseDTO<CounselDto.Response> update(@PathVariable Long counselId, @RequestBody CounselDto.Request request) {
+    public ResponseDTO<CounselDTO.Response> update(@PathVariable Long counselId, @RequestBody CounselDTO.Request request) {
         return ok(counselService.update(counselId, request));
     }
 
     @DeleteMapping("/{counselId}")
-    public ResponseDTO<CounselDto.Response> delete(@PathVariable Long counselId) {
+    public ResponseDTO<CounselDTO.Response> delete(@PathVariable Long counselId) {
         counselService.delete(counselId);
         return ok();
     }

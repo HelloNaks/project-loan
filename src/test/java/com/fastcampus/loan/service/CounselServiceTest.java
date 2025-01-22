@@ -3,7 +3,7 @@ package com.fastcampus.loan.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import  static org.mockito.Mockito.when;
 import com.fastcampus.loan.domain.Counsel;
-import com.fastcampus.loan.dto.CounselDto;
+import com.fastcampus.loan.dto.CounselDTO;
 import com.fastcampus.loan.exception.BaseException;
 import com.fastcampus.loan.exception.ResultType;
 import com.fastcampus.loan.repository.CounselRepository;
@@ -40,7 +40,7 @@ public class CounselServiceTest {
                 .addressDetail("101동 101호")
                 .build();
 
-        CounselDto.Request request = CounselDto.Request.builder()
+        CounselDTO.Request request = CounselDTO.Request.builder()
                 .name("Member Kim")
                 .cellPhone("010-1111-2222")
                 .email("abc@def.g")
@@ -52,7 +52,7 @@ public class CounselServiceTest {
         when(counselRepository.save(ArgumentMatchers.any(Counsel.class)))
                 .thenReturn(entity);
 
-        CounselDto.Response actual = counselService.create(request);
+        CounselDTO.Response actual = counselService.create(request);
         assertThat(actual.getName()).isSameAs(entity.getName());
     }
 
@@ -66,7 +66,7 @@ public class CounselServiceTest {
 
         when(counselRepository.findById(findId)).thenReturn(Optional.ofNullable(entity));
 
-        CounselDto.Response actual = counselService.get(findId);
+        CounselDTO.Response actual = counselService.get(findId);
 
         assertThat(actual.getCounselId()).isSameAs(findId);
     }
@@ -88,14 +88,14 @@ public class CounselServiceTest {
                 .name("Member Kim")
                 .build();
 
-        CounselDto.Request request = CounselDto.Request.builder()
+        CounselDTO.Request request = CounselDTO.Request.builder()
                 .name("Member Kang")
                 .build();
 
         when(counselRepository.save(ArgumentMatchers.any(Counsel.class))).thenReturn(entity);
         when(counselRepository.findById(findId)).thenReturn(Optional.ofNullable(entity));
 
-        CounselDto.Response actual = counselService.update(findId, request);
+        CounselDTO.Response actual = counselService.update(findId, request);
 
         assertThat(actual.getCounselId()).isSameAs(findId);
         assertThat(actual.getName()).isSameAs(request.getName());
