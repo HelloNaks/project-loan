@@ -15,6 +15,7 @@ import org.modelmapper.ModelMapper;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -70,4 +71,25 @@ public class ApplicationServiceTest {
         assertThat(actual.getApplicationId()).isSameAs(findId);
     }
 
+    @Test
+    void Should_ReturnUpdateResponseOfExistApplicationEntity_When_RequestUpdateExistApplicationInfo(){
+        Long findId = 1L;
+
+        Application entity = Application.builder()
+                .applicationId(1L)
+                .hopeAmount(BigDecimal.valueOf(50000000))
+                .build();
+
+        ApplicationDTO.Request request = ApplicationDTO.Request.builder()
+                .hopeAmount(BigDecimal.valueOf(5000000))
+                .build();
+
+        when(applicationRepository.save(ArgumentMatchers.any(Application.class))).thenReturn(entity);
+        when(applicationRepository.findById(findId)).thenReturn(Optional.ofNullable(entity));
+
+        ApplicationDTO.Response actual = applicationService.update(findId, request);
+
+        assertThat(actual.getApplicationId()).isSameAs(findId);
+        assertThat(actual.getHopeAmount()).isSameAs(request.getHopeAmount());
+    }
 }
