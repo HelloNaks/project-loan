@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.fastcampus.loan.service.CounselServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-01-19T09:14:59" hostname="gimnaghyeon-ui-MacBookPro.local" time="0.351">
-  <properties/>
-  <testcase name="Should_DeletedCounselEntity_When_RequestDeleteExistCounseInfo()" classname="com.fastcampus.loan.service.CounselServiceTest" time="0.351"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
