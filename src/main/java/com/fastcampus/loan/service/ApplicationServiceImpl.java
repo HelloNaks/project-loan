@@ -1,16 +1,22 @@
 package com.fastcampus.loan.service;
 
 import com.fastcampus.loan.domain.Application;
+import com.fastcampus.loan.domain.Terms;
 import com.fastcampus.loan.dto.ApplicationDTO;
 import com.fastcampus.loan.exception.BaseException;
 import com.fastcampus.loan.exception.ResultType;
+import com.fastcampus.loan.repository.AcceptTermsRepository;
 import com.fastcampus.loan.repository.ApplicationRepository;
+import com.fastcampus.loan.repository.TermsRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +24,10 @@ public class ApplicationServiceImpl implements ApplicationService
 {
 
     private final ApplicationRepository applicationRepository;
+
+    private final TermsRepository termsRepository;
+
+    private final AcceptTermsRepository acceptTermsRepository;
 
     private final ModelMapper modelMapper;
 
@@ -64,4 +74,44 @@ public class ApplicationServiceImpl implements ApplicationService
         application.setIsDeleted(true);
         applicationRepository.save(application);
     }
+
+    @Override
+    public Boolean acceptTerms(Long applicationId, ApplicationDTO.AcceptTerms request) {
+        applicationRepository.findById(applicationId).orElseThrow(()->{
+           throw new BaseException(ResultType.SYSTEM_ERROR);
+        });
+
+        List<Terms> termsList = termsRepository.findAll(Sort.by(Sort.Direction.ASC, "termsId"));
+        if(termsList.isEmpty()){
+            throw new BaseException(ResultType.SYSTEM_ERROR);
+        }
+
+        List<Long> acceptTermsIds = request.getAcceptTermsIds();
+        if(termsList.size() != acceptTermsIds.size()){
+            throw new BaseException(ResultType.SYSTEM_ERROR);
+        }
+
+        List<Long> termsIds = termsList.stream().map(Terms::getTermsId).collect(Collectors.toList());
+        Collections.sort(acceptTermsIds);
+
+        if(!termsIds.containsAll(acceptTermsIds)) {
+            throw new BaseException(ResultType.SYSTEM_ERROR);
+        }
+        System.out.println("aaaaaa");
+        for(Long termsId : acceptTermsIds){
+            com.fastcampus.loan.domain.AcceptTerms accepted = com.fastcampus.loan.domain.AcceptTerms.builder()
+                    .termsId(termsId)
+                    .applicationId(applicationId)
+                    .build();
+
+            acceptTermsRepository.save(accepted);
+        }
+
+        System.out.println("bbbbbb");
+
+
+        return true;
+    }
+
+
 }

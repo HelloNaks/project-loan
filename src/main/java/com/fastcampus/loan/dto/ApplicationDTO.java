@@ -5,6 +5,7 @@ import lombok.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ApplicationDTO implements Serializable {
 
@@ -46,5 +47,15 @@ public class ApplicationDTO implements Serializable {
         private LocalDateTime createdAt;
 
         private LocalDateTime updatedAt;
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter
+    @Setter
+    @Builder
+    public static class AcceptTerms {
+
+        private List<Long> acceptTermsIds;
     }
 }
