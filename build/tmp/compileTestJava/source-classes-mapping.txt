@@ -1,2 +1,6 @@
 com/fastcampus/loan/service/CounselServiceTest.java
  com.fastcampus.loan.service.CounselServiceTest
+com/fastcampus/loan/service/ApplicationServiceTest.java
+ com.fastcampus.loan.service.ApplicationServiceTest
+com/fastcampus/loan/service/TermsServiceTest.java
+ com.fastcampus.loan.service.TermsServiceTest
